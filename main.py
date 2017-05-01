@@ -1,3 +1,7 @@
 import generator
+import euler
 
-print(generator.generate_euler_graph())
+graph = generator.generate_euler_graph()
+cycle = []
+euler.find_cycle(graph, 0, cycle)
+print(cycle)
