@@ -1,8 +1,6 @@
 
 def is_incidental(graph, v1, v2):
-    if graph[v1][v2] == 1 and graph[v2][v1] == 1:
-        return True
-    return False
+    return graph[v1][v2] == 1 and graph[v2][v1] == 1
 
 def create_edge(graph, v1, v2):
     graph[v1][v2] = 1
