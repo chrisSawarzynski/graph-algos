@@ -5,7 +5,6 @@ def find_cycle(graph, v, cycle):
 
     incidentals = graph_tools.get_incidentals(graph, v)
     incidentals = filter(lambda x : x not in cycle, incidentals)
-    incidentals = list(incidentals)
 
     for w in incidentals:
         find_cycle(graph, w, cycle)
