@@ -22,3 +22,8 @@ def is_euler_graph(graph):
         if count_incidental(graph,i) % 2:
             allEven = False
     return allEven
+
+
+def get_incidentals(graph, v):
+    incidental = [i for i in range(len(graph)) if is_incidental(graph, v, i)]
+    return incidental
