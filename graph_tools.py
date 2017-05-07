@@ -11,6 +11,19 @@ def delete_edge(graph, v1, v2):
     graph[v1][v2] = 0
     graph[v2][v1] = 0
 
+def count_edges(graph):
+    edges = []
+
+    for i in range(len(graph)):
+        for w in range(len(graph)):
+            if (w, i) not in edges \
+                and (i, w) not in edges \
+                and is_incidental(graph, i, w):
+
+                edges.extend([(w, i), (i, w)])
+
+    return len(edges) / 2
+
 
 def count_incidental(graph, v):
     from functools import reduce
@@ -18,6 +31,7 @@ def count_incidental(graph, v):
 
 def is_connected(graph):
     visited = [False for i in graph]
+
     s = []
     vc = 0
     s.append(0)
