@@ -16,12 +16,29 @@ def count_incidental(graph, v):
     from functools import reduce
     return reduce(lambda a, b: a+b, graph[v])
 
+def is_connected(graph):
+    visited = [False for i in graph]
+    s = []
+    vc = 0
+    s.append(0)
+    visited[0] = True
+    while len(s):
+        v = s.pop()
+        vc += 1
+        for i in get_incidentals(graph, v):
+            if visited[i] is False:
+                visited[i] = True
+                s.append(i)
+    return vc == len(graph)
+
+
 def is_euler_graph(graph):
     allEven = True
     for i in range(len(graph)):
         if count_incidental(graph,i) % 2:
             allEven = False
-    return allEven
+    
+    return allEven and is_connected(graph)
 
 
 def get_incidentals(graph, v):
