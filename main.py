@@ -4,7 +4,7 @@ import hamilton
 import graph_tools
 from copy import copy
 
-original_graph = generator.generate_euler_graph(3)
+original_graph = generator.generate_euler_graph(5)
 
 
 if graph_tools.is_euler_graph(original_graph):
@@ -12,7 +12,7 @@ if graph_tools.is_euler_graph(original_graph):
     graph = copy(original_graph)
     hamilton.find_cycle(graph, 0, cycle)
     print("hamilton:")
-    print(cycle)
+    print(hamilton.cycles)
 
 
     cycle = []
