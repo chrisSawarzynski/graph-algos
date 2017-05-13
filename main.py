@@ -3,23 +3,31 @@ import euler
 import hamilton
 import graph_tools
 from copy import copy
+import time
 
-original_graph = generator.generate_euler_graph(5)
-
-
-if graph_tools.is_euler_graph(original_graph):
+def execution_time(function, instance):
     cycle = []
-    graph = copy(original_graph)
-    hamilton.find_cycle(graph, 0, cycle)
-    print("hamilton:")
-    print(hamilton.cycles)
+    start_time = time.time()
+    function(copy(instance), 0, cycle)
+    elapsed_time = time.time() - start_time
+    return elapsed_time
 
 
-    cycle = []
-    graph = copy(original_graph)
-    euler.find_cycle(graph, 0, cycle)
-    print("euler:")
-    print(cycle)
+graphs = graph_tools.get_graphs()
+result = ""
+functions = {
+    "Hamilton cycle":hamilton.find_cycle,
+    "Euler cycle":euler.find_cycle
+}
+for function in functions.keys():
+    result += "{0}\n".format(function)
+    for graph in graphs.keys():
+        if graph_tools.is_euler_graph(graphs[graph][2]):
+            result += "{0}\t{1}\n".format(graph, execution_time(functions[function], copy(graphs[graph][2])))
+        else:
+            print("It's not euler graph")
+            print(graphs[graph][2])
 
-else:
-    print("It's not euler graph")
+file = open("result30.txt", "w")
+file.write(result)
+print(result)

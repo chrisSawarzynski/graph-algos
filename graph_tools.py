@@ -58,3 +58,24 @@ def is_euler_graph(graph):
 def get_incidentals(graph, v):
     incidental = [i for i in range(len(graph)) if is_incidental(graph, v, i)]
     return incidental
+
+
+def get_graphs():
+    i = 10
+    graphs = {}
+    while i <= 50:
+        graphs[i] = load_graphs("./instancje/{0}w.txt".format(i))
+        i += 5
+    return graphs
+
+def load_graphs(filename):
+    def prepare(x):
+        x = x.replace("[", "").replace("]", "").split("\n")
+        return list(map(lambda y: list(map(lambda k: int(k), filter(None, y.split(", ")))), x))
+
+    file = open(filename, 'r')
+    content = file.read()
+    file.close()
+    graphs = map(prepare ,content.split("\n\n\n"))
+    graphs = list(graphs)[:-1]
+    return graphs
