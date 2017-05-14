@@ -15,10 +15,12 @@ def execution_time(function, instance):
 
 graphs = graph_tools.get_graphs()
 result = ""
+
 functions = {
     "Hamilton cycle":hamilton.find_cycle,
     "Euler cycle":euler.find_cycle
 }
+
 for function in functions.keys():
     result += "{0}\n".format(function)
     for graph in graphs.keys():
