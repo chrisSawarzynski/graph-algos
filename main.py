@@ -9,7 +9,7 @@ import tools
 def execution_time(function, instance):
     cycle = []
     start_time = time.time()
-    function(copy(instance), 0, cycle)
+    function(instance, 0, cycle)
     elapsed_time = time.time() - start_time
     return elapsed_time
 
