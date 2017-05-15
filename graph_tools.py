@@ -63,7 +63,7 @@ def get_incidentals(graph, v):
 def get_graphs():
     i = 10
     graphs = {}
-    while i <= 50:
+    while i <= 15:
         graphs[i] = load_graphs("./instancje/{0}w.txt".format(i))
         i += 5
     return graphs
@@ -79,3 +79,7 @@ def load_graphs(filename):
     graphs = map(prepare ,content.split("\n\n\n"))
     graphs = list(graphs)[:-1]
     return graphs
+
+def save_to_file(result, name="result.txt"):
+    with open(name, "a") as file:
+        file.write(result)

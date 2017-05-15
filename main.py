@@ -28,8 +28,6 @@ for function in functions.keys():
             result += "{0}\t{1}\n".format(graph, execution_time(functions[function], copy(graphs[graph][2])))
         else:
             print("It's not euler graph")
-            print(graphs[graph][2])
 
-file = open("result30.txt", "w")
-file.write(result)
-print(result)
+with open("result30.txt", "a") as file:
+    file.write(result)
