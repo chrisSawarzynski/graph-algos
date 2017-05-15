@@ -1,3 +1,4 @@
+import tools
 
 def is_incidental(graph, v1, v2):
     return graph[v1][v2] == 1 and graph[v2][v1] == 1
@@ -63,7 +64,7 @@ def get_incidentals(graph, v):
 def get_graphs():
     i = 10
     graphs = {}
-    while i <= 15:
+    while i <= 10:
         graphs[i] = load_graphs("./instancje/{0}w.txt".format(i))
         i += 5
     return graphs

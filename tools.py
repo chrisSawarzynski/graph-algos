@@ -1,11 +1,9 @@
 from functools import reduce
+import graph_tools
+
 
 def matrix_to_list(matrix):
-    graph = [[] for i in range(len(matrix))]
-    for i in range(len(matrix)):
-        for j in range(len(matrix[i])):
-            if matrix[i][j] == 1 and matrix[i][j] not in graph[i]:
-                graph[i].append(j)
+    graph = [graph_tools.get_incidentals(matrix, v) for v in range(len(matrix))]
     return graph
 
 

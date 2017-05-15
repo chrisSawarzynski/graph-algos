@@ -4,6 +4,7 @@ import hamilton
 import graph_tools
 from copy import copy
 import time
+import tools
 
 def execution_time(function, instance):
     cycle = []
@@ -24,8 +25,9 @@ functions = {
 for function in functions.keys():
     result += "{0}\n".format(function)
     for graph in graphs.keys():
-        if graph_tools.is_euler_graph(graphs[graph][2]):
-            result += "{0}\t{1}\n".format(graph, execution_time(functions[function], copy(graphs[graph][2])))
+        if graph_tools.is_euler_graph(graphs[graph][0]):
+            exec_time = execution_time(functions[function], tools.matrix_to_list(graphs[graph][0]))
+            result += "{0}\t{1}\n".format(graph, exec_time)
         else:
             print("It's not euler graph")
 
