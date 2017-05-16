@@ -1,5 +1,6 @@
 import random
-
+import json
+import os
 
 def generuj_graf(graph,v, b):
     for i in range(1,v):
@@ -23,3 +24,21 @@ def generuj_graf(graph,v, b):
             else:
                 graph[i][x] = 1
                 graph[x][i] = 1
+
+def save(graph, dir, filename):
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+    with open(dir + '/' + filename, 'w') as file:
+        json.dump(graph, file)
+
+def generate():
+    sizes = [i * 5 for i in range(5, 21)]
+    bList = [30, 50, 70]
+    for b in bList:
+        for v in sizes:
+            graph = [[0 for i in range(v)] for i in range(v)]
+            generuj_graf(graph,v, b)
+            save(graph, "./instances-{0}".format(b), "{0}.txt".format(v))
+
+generate()
+

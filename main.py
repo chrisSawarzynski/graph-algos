@@ -1,10 +1,15 @@
-import generator
+import threading
 import euler
 import hamilton
 import graph_tools
 from copy import copy
 import time
 import tools
+import sys
+
+threading.stack_size(67108864) # 64MB stack
+sys.setrecursionlimit(2**20) # something real big
+
 
 def execution_time(function, instance):
     cycle = []
@@ -14,22 +19,25 @@ def execution_time(function, instance):
     return elapsed_time
 
 
-graphs = graph_tools.get_graphs()
+graphs = tools.get_graphs()
 result = ""
 
 functions = {
     "Hamilton cycle":hamilton.find_cycle,
+    "Hamilton cycles":hamilton.find_all_cycles,
     "Euler cycle":euler.find_cycle
 }
 
-for function in functions.keys():
-    result += "{0}\n".format(function)
-    for graph in graphs.keys():
-        if graph_tools.is_euler_graph(graphs[graph][0]):
-            exec_time = execution_time(functions[function], tools.matrix_to_list(graphs[graph][0]))
-            result += "{0}\t{1}\n".format(graph, exec_time)
+# for function in functions.keys():
+function = "Euler cycle"
+result += "{0}\n".format(function)
+for b in graphs.keys():
+    result += "{0}\n".format(b)
+    for v in graphs[b].keys():
+        if graphs[b][v] and graph_tools.is_euler_graph(graphs[b][v]):
+            result += "{0}\t{1}\n".format(v, execution_time(functions[function], tools.matrix_to_list(graphs[b][v])))
         else:
-            print("It's not euler graph")
+            result += "its not an euler graph\n"
+        graph_tools.save_to_file(result)
+        result = ""
 
-with open("result30.txt", "a") as file:
-    file.write(result)

@@ -1,5 +1,6 @@
 from functools import reduce
 import graph_tools
+import json
 
 
 def matrix_to_list(matrix):
@@ -42,4 +43,17 @@ def is_connected(graph):
                 to_visit.append(i)
 
     return len(visited) == len(graph)
+
+
+def get_graphs():
+    graphs = {}
+    sizes = [i * 5 for i in range(5, 21)]
+    bList = [30, 50, 70]
+    for b in bList:
+        graphs[b] = {}
+        for v in sizes:
+            with open("./instances-{0}/{1}.txt".format(b, v), 'r') as file:
+                json_graph = json.load(file)
+                graphs[b][v] = json_graph
+    return graphs
 
